@@ -9,13 +9,13 @@
     <p class="text-success">@ViewBag.StatusMessage</p>
     <div class="form_section">
         <label class="form_section form_tag">Photography</label>
-        <ul class="ai_image__list" id="files" rotation="0">
+        <ul class="ai_image__list" id="sortable" rotation="0">
             <li class="ai_image__upload" id="image-1" onclick="$('#imageupload').click();"></li>
-            <li class="ai_image__upload" id="image-2" onclick="$('#imageupload').click();"></li>
-            <li class="ai_image__upload" id="image-3" onclick="$('#imageupload').click();"></li>
+            @*<li class="ai_image__upload" id="image-2" onclick="$('#imageupload').click();"></li>
+            <li class="ai_image__upload" id="image-3" onclick="$('#imageupload').click();"></li>*@
         </ul>
-        <input class="ai_image__file" type="file" name="images[]" accept=".jpg,.jpeg,.gif,.png,.bmp" multiple="" id="imageupload">
-        <div class="form_info">Max count photographies 3</div>
+        <input type="file" name="files[]" accept=".jpg,.jpeg,.gif,.png,.bmp" multiple="" id="imageupload">
+        <div class="form_info">Max count photographies 1</div>
     </div>
     <br />
     <div class="form_section">
@@ -51,31 +51,9 @@
     <div class="form_section">
         <input type="submit" value="Save" class="btn btn-default form_control form_controlinputarea" style="font-size:17px" />
     </div>
-}
-
-        <script>
-            function handleFileSelect(evt) {
-                var files = evt.target.files;
-                for (var i = 0, f; f = files[i]; i++) {
-                    if (!f.type.match('image.*')) {
-                        continue;
-                    }
-                    var reader = new FileReader();
-                    reader.onload = (function (theFile) {
-                        return function (e) {
-                            var span = document.createElement('span');
-                            span.innerHTML = ['<img src="', e.target.result,
-                                '" title="', escape(theFile.name), '"/>'].join('');
-                            document.getElementById('imageupload').insertBefore(span, null);
-                        };
-                    })(f);
-                    reader.readAsDataURL(f);
-                }
-            }
-            document.getElementById('files').addEventListener('change', handleFileSelect, false);
-        </script>
-        @section scripts{
-            <script type="text/javascript">
+}        
+@section scripts{
+    <script type="text/javascript">
     $(function () {
         $('#region').change(function(){
             var id = $(this).val();
@@ -88,8 +66,8 @@
             });
         });
     })
-            </script>
-            <script type="text/javascript">
+    </script>
+    <script type="text/javascript">
     $(function () {
         $('#category').change(function(){
             var id = $(this).val();
@@ -102,5 +80,30 @@
             });
         });
     })
-            </script>
+    </script>
+<script>
+    function handleFileSelect(evt) {
+        var files = evt.target.files;
+        for (var i = 0, f; f = files[i]; i++) {
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+            var reader = new FileReader();
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    var span = document.createElement('span');
+                    span.innerHTML = ['<img class="thumb" src="', e.target.result,
+                        '" title="', escape(theFile.name), '"/>'].join('');
+                    span.innerHTML = ['<b  class="ai_image__delete" onclick="removeImg(this);"></b>'].join('');
+                    document.getElementById('image-1').insertBefore(span, null);
+                    
+                };
+            })(f);
+            reader.readAsDataURL(f);
+            document.getElementById("image-1").className = 'ai_image__item img';
+            document.getElementById("image-1").onclick = "none";
         }
+    }
+    document.getElementById('imageupload').addEventListener('change', handleFileSelect, false);   
+</script>
+}     

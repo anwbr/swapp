@@ -20,7 +20,7 @@
                     </ul>
                 </div>
             </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Logout</a></li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Sign out</a></li>
         </ul>
     }
 }
@@ -28,7 +28,7 @@ else
 {
     <ul class="nav navbar-nav navbar-right">
         <li>@Html.ActionLink("Registration", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Sign in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }
         

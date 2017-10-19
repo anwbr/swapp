@@ -1724,8 +1724,6 @@ input[type="number"]::-webkit-inner-spin-button {
 
 
 
-
-
 .ai_image__list {
     zoom: 1;
     list-style: none;
@@ -1745,6 +1743,18 @@ input[type="number"]::-webkit-inner-spin-button {
     background-position: 50%;
 }
 
+/*.ai_image__item img {
+    height: auto;
+    width: auto;
+}*/
+
+.ai_image__delete {
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiI…Igc3R5bGU9ImZpbGw6I2ZmZjtmaWxsLXJ1bGU6bm9uemVybzsiLz48L2c+PC9nPjwvc3ZnPg==);
+    background-size: 15px;
+    left: 50%;
+    margin: -15px 0 0 -35px;
+}
+
 .ai_image__item, .ai_image__upload {
     border-radius: 3px;
     -moz-border-radius: 3px;
@@ -1752,8 +1762,8 @@ input[type="number"]::-webkit-inner-spin-button {
     position: relative;
     background-color: #e8e8ef;
     display: inline-block;
-    height: 84px;
-    width: 123px;
+    height: 184px;
+    width: 223px;
     margin: 0 15px 15px 0;
     vertical-align: top;
 }
