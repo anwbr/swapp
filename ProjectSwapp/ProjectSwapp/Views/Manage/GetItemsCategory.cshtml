@@ -1,0 +1,8 @@
+﻿@model IEnumerable<ProjectSwapp.Models.ApplicationSubCategory>
+<select id="subcategory" name="Subcategory" class="form_controlinput">
+    @foreach (var item in Model)
+    {
+        <option value="@item.Id">@item.Name</option>
+    }
+</select>
+
