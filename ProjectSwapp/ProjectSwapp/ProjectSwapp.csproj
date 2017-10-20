@@ -194,9 +194,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709072005482_DBM.cs" />
-    <Compile Include="Migrations\201709072005482_DBM.Designer.cs">
-      <DependentUpon>201709072005482_DBM.cs</DependentUpon>
+    <Compile Include="Migrations\201710202032297_SwappDBMigration.cs" />
+    <Compile Include="Migrations\201710202032297_SwappDBMigration.Designer.cs">
+      <DependentUpon>201710202032297_SwappDBMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -206,18 +206,13 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\aspnet-ProjectSwapp-20170711091941.mdf" />
-    <Content Include="App_Data\aspnet-ProjectSwapp-20170711091941_log.ldf">
-      <DependentUpon>aspnet-ProjectSwapp-20170711091941.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Resource\200.jpg" />
-    <Content Include="Resource\Region.txt" />
+    <Content Include="Resource\CityAndRegion.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -256,11 +251,11 @@
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Manage\Published.cshtml" />
     <Content Include="Views\Manage\Requestpublished.cshtml" />
-    <Content Include="Views\Manage\AddPublished.cshtml" />
-    <Content Include="Views\Manage\GetItems.cshtml" />
     <Content Include="Views\Manage\GetItemsCategory.cshtml" />
+    <Content Include="Views\Manage\CreatePost.cshtml" />
+    <Content Include="Views\Manage\Posts.cshtml" />
+    <Content Include="Views\Manage\GetItemsCity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -277,10 +272,12 @@
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709072005482_DBM.resx">
-      <DependentUpon>201709072005482_DBM.cs</DependentUpon>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201710202032297_SwappDBMigration.resx">
+      <DependentUpon>201710202032297_SwappDBMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

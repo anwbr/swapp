@@ -15,119 +15,120 @@ namespace ProjectSwapp.Migrations
 
         protected override void Seed(ProjectSwapp.Models.ApplicationDbContext context)
         {
-            context.ApplicationAddressRegionPost.Add(
-              new Models.ApplicationAddressRegionPost
+
+            context.SwappAdrRegionPost.Add(
+              new Models.SwappAdrRegionPost
               {
                   Id = Guid.NewGuid().ToString(),
                   Region = "Minsk region",
-                  AddressCityPost = new List<Models.ApplicationAddressCityPost>()
+                  AddressCityPost = new List<Models.SwappAdrCityPost>()
                    {
-                        new Models.ApplicationAddressCityPost
+                        new Models.SwappAdrCityPost
                         {
                             Id = Guid.NewGuid().ToString(),
                             City = "Minsk"
                         },
-                        new Models.ApplicationAddressCityPost
+                        new Models.SwappAdrCityPost
                         {
                             Id = Guid.NewGuid().ToString(),
                             City = "Borisov"
                         },
-                        new Models.ApplicationAddressCityPost
+                        new Models.SwappAdrCityPost
                         {
                             Id = Guid.NewGuid().ToString(),
                             City = "Krupki"
                         },
-                        new Models.ApplicationAddressCityPost
+                        new Models.SwappAdrCityPost
                         {
                             Id = Guid.NewGuid().ToString(),
                             City = "Logoisk"
                         }
                    }
               });
-            context.ApplicationAddressRegionPost.Add(
-                new Models.ApplicationAddressRegionPost
+            context.SwappAdrRegionPost.Add(
+                new Models.SwappAdrRegionPost
                 {
                     Id = Guid.NewGuid().ToString(),
                     Region = "Brest region",
-                    AddressCityPost = new List<Models.ApplicationAddressCityPost>()
+                    AddressCityPost = new List<Models.SwappAdrCityPost>()
                    {
-                        new Models.ApplicationAddressCityPost
+                        new Models.SwappAdrCityPost
                         {
                             Id = Guid.NewGuid().ToString(),
                             City = "Brest"
                         },
-                        new Models.ApplicationAddressCityPost
+                        new Models.SwappAdrCityPost
                         {
                             Id = Guid.NewGuid().ToString(),
                             City = "Lyahovichi"
                         },
-                        new Models.ApplicationAddressCityPost
+                        new Models.SwappAdrCityPost
                         {
                             Id = Guid.NewGuid().ToString(),
                             City = "Ivacevichi"
                         }
                    }
                 });
-            context.ApplicationAddressRegionPost.Add(
-              new Models.ApplicationAddressRegionPost
+            context.SwappAdrRegionPost.Add(
+              new Models.SwappAdrRegionPost
               {
                   Id = Guid.NewGuid().ToString(),
                   Region = "Grodno region",
-                  AddressCityPost = new List<Models.ApplicationAddressCityPost>()
+                  AddressCityPost = new List<Models.SwappAdrCityPost>()
                    {
-                        new Models.ApplicationAddressCityPost
+                        new Models.SwappAdrCityPost
                         {
                             Id = Guid.NewGuid().ToString(),
                             City = "Grodno"
                         },
-                        new Models.ApplicationAddressCityPost
+                        new Models.SwappAdrCityPost
                         {
                             Id = Guid.NewGuid().ToString(),
                             City = "Slonim"
                         }
                    }
               });
-            context.ApplicationAddressRegionPost.Add(
-              new Models.ApplicationAddressRegionPost
+            context.SwappAdrRegionPost.Add(
+              new Models.SwappAdrRegionPost
               {
                   Id = Guid.NewGuid().ToString(),
                   Region = "Mogilev region",
-                  AddressCityPost = new List<Models.ApplicationAddressCityPost>()
+                  AddressCityPost = new List<Models.SwappAdrCityPost>()
                    {
-                        new Models.ApplicationAddressCityPost
+                        new Models.SwappAdrCityPost
                         {
                             Id = Guid.NewGuid().ToString(),
                             City = "Mogilev"
                         },
-                        new Models.ApplicationAddressCityPost
+                        new Models.SwappAdrCityPost
                         {
                             Id = Guid.NewGuid().ToString(),
                             City = "Slonim"
                         }
                    }
               });
-            context.ApplicationAddressRegionPost.Add(
-              new Models.ApplicationAddressRegionPost
+            context.SwappAdrRegionPost.Add(
+              new Models.SwappAdrRegionPost
               {
                   Id = Guid.NewGuid().ToString(),
                   Region = "Gomel region",
-                  AddressCityPost = new List<Models.ApplicationAddressCityPost>()
+                  AddressCityPost = new List<Models.SwappAdrCityPost>()
                    {
-                        new Models.ApplicationAddressCityPost
+                        new Models.SwappAdrCityPost
                         {
                             Id = Guid.NewGuid().ToString(),
                             City = "Gomel"
                         }
                    }
               });
-            context.ApplicationAddressRegionPost.Add(
-              new Models.ApplicationAddressRegionPost
+            context.SwappAdrRegionPost.Add(
+              new Models.SwappAdrRegionPost
               {
                   Id = Guid.NewGuid().ToString(),
                   Region = "Vitebsk region",
-                  AddressCityPost = new List<Models.ApplicationAddressCityPost>()
+                  AddressCityPost = new List<Models.SwappAdrCityPost>()
                    {
-                        new Models.ApplicationAddressCityPost
+                        new Models.SwappAdrCityPost
                         {
                             Id = Guid.NewGuid().ToString(),
                             City = "Vitebsk"
@@ -136,89 +137,89 @@ namespace ProjectSwapp.Migrations
               });
 
 
- context.ApplicationCategory.Add(
-                new Models.ApplicationCategory
+            context.SwappCategory.Add(
+            new Models.SwappCategory
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = "Style",
+                SubCategory = new List<Models.SwappSubCategory>()
                 {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = "Style",
-                    SubCategory = new List<Models.ApplicationSubCategory>()
-                    {
-                        new Models.ApplicationSubCategory
+                        new Models.SwappSubCategory
                         {
                             Id = Guid.NewGuid().ToString(),
                             Name = "Men clothes",
                             Points = 10
                         },
-                        new Models.ApplicationSubCategory
+                        new Models.SwappSubCategory
                         {
                             Id = Guid.NewGuid().ToString(),
                             Name = "Woman clothes",
                             Points = 10
                         },
-                         new Models.ApplicationSubCategory
+                         new Models.SwappSubCategory
                         {
                             Id = Guid.NewGuid().ToString(),
                             Name = "Men shoes",
                             Points = 10
                         },
-                        new Models.ApplicationSubCategory
+                        new Models.SwappSubCategory
                         {
                             Id = Guid.NewGuid().ToString(),
                             Name = "Woman shoes",
                             Points = 10
                         },
-                         new Models.ApplicationSubCategory
+                         new Models.SwappSubCategory
                         {
                             Id = Guid.NewGuid().ToString(),
                             Name = "Men clothes",
                             Points = 10
                         },
-                        new Models.ApplicationSubCategory
+                        new Models.SwappSubCategory
                         {
                             Id = Guid.NewGuid().ToString(),
                             Name = "Clocks",
                             Points = 8
                         },
-                        new Models.ApplicationSubCategory
+                        new Models.SwappSubCategory
                         {
                             Id = Guid.NewGuid().ToString(),
                             Name = "Other",
                             Points = 8
                         }
-                    }
-                });
-            context.ApplicationCategory.Add(
-                new Models.ApplicationCategory
+                }
+            });
+            context.SwappCategory.Add(
+                new Models.SwappCategory
                 {
                     Id = Guid.NewGuid().ToString(),
                     Name = "Technic",
-                    SubCategory = new List<Models.ApplicationSubCategory>()
+                    SubCategory = new List<Models.SwappSubCategory>()
                     {
-                        new Models.ApplicationSubCategory
+                        new Models.SwappSubCategory
                         {
                             Id = Guid.NewGuid().ToString(),
                             Name = "Audio",
                             Points = 15
                         },
-                        new Models.ApplicationSubCategory
+                        new Models.SwappSubCategory
                         {
                             Id = Guid.NewGuid().ToString(),
                             Name = "TV and video",
                             Points = 15
                         },
-                         new Models.ApplicationSubCategory
+                         new Models.SwappSubCategory
                         {
                             Id = Guid.NewGuid().ToString(),
                             Name = "Computer",
                             Points = 15
                         },
-                        new Models.ApplicationSubCategory
+                        new Models.SwappSubCategory
                         {
                             Id = Guid.NewGuid().ToString(),
                             Name = "Phone",
                             Points = 10
                         },
-                         new Models.ApplicationSubCategory
+                         new Models.SwappSubCategory
                         {
                             Id = Guid.NewGuid().ToString(),
                             Name = "Other",
@@ -226,26 +227,26 @@ namespace ProjectSwapp.Migrations
                         }
                     }
                 });
-            context.ApplicationCategory.Add(
-                new Models.ApplicationCategory
+            context.SwappCategory.Add(
+                new Models.SwappCategory
                 {
                     Id = Guid.NewGuid().ToString(),
                     Name = "Auto",
-                    SubCategory = new List<Models.ApplicationSubCategory>()
+                    SubCategory = new List<Models.SwappSubCategory>()
                     {
-                        new Models.ApplicationSubCategory
+                        new Models.SwappSubCategory
                         {
                             Id = Guid.NewGuid().ToString(),
                             Name = "Tires and wheels",
                             Points = 20
                         },
-                        new Models.ApplicationSubCategory
+                        new Models.SwappSubCategory
                         {
                             Id = Guid.NewGuid().ToString(),
                             Name = "Passenger car",
                             Points = 50
                         },
-                         new Models.ApplicationSubCategory
+                         new Models.SwappSubCategory
                         {
                             Id = Guid.NewGuid().ToString(),
                             Name = "Services for car",
@@ -253,18 +254,6 @@ namespace ProjectSwapp.Migrations
                         }
                     }
                 });
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
         }
     }
 }

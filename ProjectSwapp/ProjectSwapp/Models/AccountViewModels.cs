@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProjectSwapp.Models
 {
-    public class RegisterViewModelUser
+    public class RegisterViewModel
     {
         [Required(ErrorMessage = "Please input Name")]
-        [MinLength(6, ErrorMessage = "The value must contain at least 6 characters")]
+        [MinLength(4, ErrorMessage = "The value must contain at least 4 characters")]
         [Display(Name = "Name")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Please input Password")]
@@ -26,22 +26,13 @@ namespace ProjectSwapp.Models
         public string ConfirmPassword { get; set; }
         [Required(ErrorMessage = "Please input Login")]
         [Display(Name = "Login")]
+        [MinLength(5, ErrorMessage = "The value must contain at least 5 characters")]
         public string UserName { get; set; }
         [Required(ErrorMessage = "Please input Number of phone")]
         [Display(Name = "Number of phone")]
         public string PhoneNumber { get; set; }
-        public RegisterViewModelPoints RegisterViewModelPoints { get; set; }
     }
-    public class RegisterViewModelPoints
-    {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        [Required]
-        public RegisterViewModelUser RegisterViewModelUser { get; set; }
-        public int? Earned { get; set; }
-        public int? Spent { get; set; }
-        public DateTime Date { get; set; }
-    }
+   
     public class LoginViewModel
     {
         [Required]

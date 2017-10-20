@@ -10,21 +10,19 @@ using System.Collections.Generic;
 
 namespace ProjectSwapp.Models
 {
-    // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
         public string Name { get; set; }
-        public ApplicationPoints Points { get; set; }
-        public virtual ICollection<ApplicationPost> Posts { get; set; }
+        public SwappPoints Points { get; set; }
+        public virtual ICollection<SwappPosts> Posts { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
-            // Обратите внимание, что authenticationType должен совпадать с типом, определенным в CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Здесь добавьте утверждения пользователя
             return userIdentity;
         }
     }
-    public class ApplicationPoints
+
+    public class SwappPoints
     {
         public string Id { get; set; }
         [Required]
@@ -35,7 +33,7 @@ namespace ProjectSwapp.Models
         public DateTime Date { get; set; }
     }
 
-    public class ApplicationPost
+    public class SwappPosts
     {
         public string Id { get; set; }
         public string Name { get; set; }
@@ -48,48 +46,47 @@ namespace ProjectSwapp.Models
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
         public string SubCategoryId { get; set; }
-        public ApplicationSubCategory SubCategory { get; set; }
+        public SwappSubCategory SubCategory { get; set; }
     }
 
-    #region Category
-    public class ApplicationCategory
+    public class SwappCategory
     {
         public string Id { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<ApplicationSubCategory> SubCategory { get; set; }
+        public virtual ICollection<SwappSubCategory> SubCategory { get; set; }
     }
-    public class ApplicationSubCategory
+
+    public class SwappSubCategory
     {
         public string Id { get; set; }
         public string Name { get; set; }
         public int Points { get; set; }
-        public string ApplicationCategoryId { get; set; }
-        public ApplicationCategory ApplicationCategory { get; set; }
-        public virtual ICollection<ApplicationPost> Posts { get; set; }
+        public string SwappCategoryId { get; set; }
+        public SwappCategory SwappCategory { get; set; }
     }
-    #endregion
-    #region Region
-    public class ApplicationAddressRegionPost
+
+    public class SwappAdrRegionPost
     {
         public string Id { get; set; }
         public string Region { get; set; }
-        public virtual ICollection<ApplicationAddressCityPost> AddressCityPost { get; set; }
+        public virtual ICollection<SwappAdrCityPost> AddressCityPost { get; set; }
     }
-    public class ApplicationAddressCityPost
+
+    public class SwappAdrCityPost
     {
         public string Id { get; set; }
         public string City { get; set; }
-        public string ApplicationAddressRegionPostId { get; set; }
-        public ApplicationAddressRegionPost ApplicationAddressRegionPost { get; set; }
+        public string SwappAdrRegionPostId { get; set; }
+        public SwappAdrRegionPost SwappAdrRegionPost { get; set; }
     }
-    #endregion 
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<ApplicationPost> ApplicationPost { get; set; }
-        public DbSet<ApplicationCategory> ApplicationCategory { get; set; }
-        public DbSet<ApplicationSubCategory> ApplicationSubCategory { get; set; }
-        public DbSet<ApplicationAddressRegionPost> ApplicationAddressRegionPost { get; set; }
-        public DbSet<ApplicationAddressCityPost> ApplicationAddressCityPost { get; set; }
+        public DbSet<SwappPosts> SwappPosts { get; set; }
+        public DbSet<SwappCategory> SwappCategory { get; set; }
+        public DbSet<SwappSubCategory> SwappSubCategory { get; set; }
+        public DbSet<SwappAdrRegionPost> SwappAdrRegionPost { get; set; }
+        public DbSet<SwappAdrCityPost> SwappAdrCityPost { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -98,6 +95,5 @@ namespace ProjectSwapp.Models
         {
             return new ApplicationDbContext();
         }
-
     }
 }

@@ -11,7 +11,7 @@
         <a class="btn btn-default" href="Requestpublished" role="button">Settings</a>
     </div>
     <div class="col-lg-9">
-        @foreach (ProjectSwapp.Models.ApplicationPost item in ViewBag.item)
+        @foreach (ProjectSwapp.Models.SwappPosts item in ViewBag.item)
             {
             <div class="col-lg-12 row">
                 <div class="col-lg-3">
@@ -33,10 +33,10 @@
                     @Html.DisplayFor(model => item.Address, new { @class = "form-control" })
                     <br />
                     @*@Html.Label("Date:", new { @class = "control-label" })
-                    @Html.DisplayFor(model => item.Date.Date, new { @class = "form-control" })
-                    <br />*@
+                        @Html.DisplayFor(model => item.Date.Date, new { @class = "form-control" })
+                        <br />*@
                     @*@Html.Label("Points:", new { @class = "control-label" })
-                    @Html.DisplayFor(model => item.Points, new { @class = "form-control" })*@
+                        @Html.DisplayFor(model => item.Points, new { @class = "form-control" })*@
                 </div>
                 <div class="col-lg-2">
                     @using (Html.BeginForm("Delete", "Manage", FormMethod.Post))
@@ -47,15 +47,15 @@
                 </div>
             </div>
             <br />
-            }
+        }
     </div>
 </div>
 
 
 
 
- 
-           
+
+
 
 
 

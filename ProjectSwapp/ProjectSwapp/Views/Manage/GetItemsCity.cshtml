@@ -1,7 +1,8 @@
-﻿@model IEnumerable<ProjectSwapp.Models.ApplicationAddressCityPost>
+﻿@model IEnumerable<ProjectSwapp.Models.SwappAdrCityPost>
 <select id="city" name="City" class="form-control">
     @foreach (var item in Model)
     {
         <option value="@item.Id">@item.City</option>
     }
 </select>
+

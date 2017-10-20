@@ -63,7 +63,7 @@ namespace ProjectSwapp.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModelUser model)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -73,13 +73,13 @@ namespace ProjectSwapp.Controllers
                     Email = model.Email,
                     UserName = model.UserName,
                     PhoneNumber = model.PhoneNumber,
-                    Points = new ApplicationPoints
+                    Points = new SwappPoints
                     {
                         Points = 10,
                         Earned = 10,
                         Date = DateTime.Now
                     },
-                    Posts = new List<ApplicationPost>()
+                    Posts = new List<SwappPosts>()
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -109,9 +109,6 @@ namespace ProjectSwapp.Controllers
             {
                 return View(model);
             }
-
-            // Сбои при входе не приводят к блокированию учетной записи
-            // Чтобы ошибки при вводе пароля инициировали блокирование учетной записи, замените на shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
@@ -145,14 +142,12 @@ namespace ProjectSwapp.Controllers
                     _userManager.Dispose();
                     _userManager = null;
                 }
-
                 if (_signInManager != null)
                 {
                     _signInManager.Dispose();
                     _signInManager = null;
                 }
             }
-
             base.Dispose(disposing);
         }
 

@@ -3,24 +3,47 @@ namespace ProjectSwapp.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class DBM : DbMigration
+    public partial class SwappDBMigration : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.ApplicationAddressCityPosts",
+                "dbo.AspNetRoles",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Name = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
+            
+            CreateTable(
+                "dbo.AspNetUserRoles",
+                c => new
+                    {
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        RoleId = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.RoleId })
+                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId)
+                .Index(t => t.RoleId);
+            
+            CreateTable(
+                "dbo.SwappAdrCityPosts",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         City = c.String(),
-                        ApplicationAddressRegionPostId = c.String(maxLength: 128),
+                        SwappAdrRegionPostId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.ApplicationAddressRegionPosts", t => t.ApplicationAddressRegionPostId)
-                .Index(t => t.ApplicationAddressRegionPostId);
+                .ForeignKey("dbo.SwappAdrRegionPosts", t => t.SwappAdrRegionPostId)
+                .Index(t => t.SwappAdrRegionPostId);
             
             CreateTable(
-                "dbo.ApplicationAddressRegionPosts",
+                "dbo.SwappAdrRegionPosts",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
@@ -29,7 +52,7 @@ namespace ProjectSwapp.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.ApplicationCategories",
+                "dbo.SwappCategories",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
@@ -38,20 +61,20 @@ namespace ProjectSwapp.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.ApplicationSubCategories",
+                "dbo.SwappSubCategories",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         Name = c.String(),
                         Points = c.Int(nullable: false),
-                        ApplicationCategoryId = c.String(maxLength: 128),
+                        SwappCategoryId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.ApplicationCategories", t => t.ApplicationCategoryId)
-                .Index(t => t.ApplicationCategoryId);
+                .ForeignKey("dbo.SwappCategories", t => t.SwappCategoryId)
+                .Index(t => t.SwappCategoryId);
             
             CreateTable(
-                "dbo.ApplicationPosts",
+                "dbo.SwappPosts",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
@@ -66,7 +89,7 @@ namespace ProjectSwapp.Migrations
                         SubCategoryId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.ApplicationSubCategories", t => t.SubCategoryId)
+                .ForeignKey("dbo.SwappSubCategories", t => t.SubCategoryId)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId)
                 .Index(t => t.UserId)
                 .Index(t => t.SubCategoryId);
@@ -118,7 +141,7 @@ namespace ProjectSwapp.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
-                "dbo.ApplicationPoints",
+                "dbo.SwappPoints",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
@@ -131,64 +154,41 @@ namespace ProjectSwapp.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.Id)
                 .Index(t => t.Id);
             
-            CreateTable(
-                "dbo.AspNetUserRoles",
-                c => new
-                    {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
-                    })
-                .PrimaryKey(t => new { t.UserId, t.RoleId })
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
-                .Index(t => t.UserId)
-                .Index(t => t.RoleId);
-            
-            CreateTable(
-                "dbo.AspNetRoles",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true, name: "RoleNameIndex");
-            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.ApplicationPosts", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.ApplicationPoints", "Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.SwappPosts", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.SwappPoints", "Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.ApplicationPosts", "SubCategoryId", "dbo.ApplicationSubCategories");
-            DropForeignKey("dbo.ApplicationSubCategories", "ApplicationCategoryId", "dbo.ApplicationCategories");
-            DropForeignKey("dbo.ApplicationAddressCityPosts", "ApplicationAddressRegionPostId", "dbo.ApplicationAddressRegionPosts");
-            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
-            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.ApplicationPoints", new[] { "Id" });
+            DropForeignKey("dbo.SwappPosts", "SubCategoryId", "dbo.SwappSubCategories");
+            DropForeignKey("dbo.SwappSubCategories", "SwappCategoryId", "dbo.SwappCategories");
+            DropForeignKey("dbo.SwappAdrCityPosts", "SwappAdrRegionPostId", "dbo.SwappAdrRegionPosts");
+            DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropIndex("dbo.SwappPoints", new[] { "Id" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.ApplicationPosts", new[] { "SubCategoryId" });
-            DropIndex("dbo.ApplicationPosts", new[] { "UserId" });
-            DropIndex("dbo.ApplicationSubCategories", new[] { "ApplicationCategoryId" });
-            DropIndex("dbo.ApplicationAddressCityPosts", new[] { "ApplicationAddressRegionPostId" });
-            DropTable("dbo.AspNetRoles");
-            DropTable("dbo.AspNetUserRoles");
-            DropTable("dbo.ApplicationPoints");
+            DropIndex("dbo.SwappPosts", new[] { "SubCategoryId" });
+            DropIndex("dbo.SwappPosts", new[] { "UserId" });
+            DropIndex("dbo.SwappSubCategories", new[] { "SwappCategoryId" });
+            DropIndex("dbo.SwappAdrCityPosts", new[] { "SwappAdrRegionPostId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
+            DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropTable("dbo.SwappPoints");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.ApplicationPosts");
-            DropTable("dbo.ApplicationSubCategories");
-            DropTable("dbo.ApplicationCategories");
-            DropTable("dbo.ApplicationAddressRegionPosts");
-            DropTable("dbo.ApplicationAddressCityPosts");
+            DropTable("dbo.SwappPosts");
+            DropTable("dbo.SwappSubCategories");
+            DropTable("dbo.SwappCategories");
+            DropTable("dbo.SwappAdrRegionPosts");
+            DropTable("dbo.SwappAdrCityPosts");
+            DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.AspNetRoles");
         }
     }
 }

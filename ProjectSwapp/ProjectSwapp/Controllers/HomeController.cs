@@ -1,9 +1,5 @@
 ﻿using ProjectSwapp.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ProjectSwapp.Controllers
@@ -12,15 +8,15 @@ namespace ProjectSwapp.Controllers
     {
         public ActionResult Index()
         {
-            List<ApplicationPost> Posts = new List<ApplicationPost>();
+            List<SwappPosts> PostsList = new List<SwappPosts>();
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                foreach (var Post in db.ApplicationPost)
+                foreach (var Post in db.SwappPosts)
                 {
-                    Posts.Add(Post);
+                    PostsList.Add(Post);
                 }
             }
-            ViewBag.item = Posts;
+            ViewBag.item = PostsList;
             return View();
         }
     }

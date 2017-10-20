@@ -60,7 +60,6 @@ namespace ProjectSwapp.Controllers
                 : message == ManageMessageId.SetPasswordSuccess ? "Setted password"
                 : message == ManageMessageId.Error ? "Error"
                 : "";
-
             var userId = User.Identity.GetUserId();            
             var model = new IndexViewModel
             {
@@ -100,6 +99,7 @@ namespace ProjectSwapp.Controllers
             AddErrors(result);
             return View(model);
         }
+
         [HttpGet]
         public ActionResult SetPassword()
         {
@@ -124,13 +124,11 @@ namespace ProjectSwapp.Controllers
                 }
                 AddErrors(result);
             }
-
-            // Это сообщение означает наличие ошибки; повторное отображение формы
             return View(model);
         }
 
         [HttpGet]
-        public async Task<ActionResult> Published()
+        public async Task<ActionResult> Posts()
         {
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user != null)
@@ -141,39 +139,14 @@ namespace ProjectSwapp.Controllers
         }
 
         [HttpGet]
-        public ActionResult Addpublished()
+        public ActionResult CreatePost()
         {
-            ApplicationDbContext db = new ApplicationDbContext();
-            string selectedIndexRegion = "3c5c16c3-8ab8-416c-8996-a4dd1a26dcd2";
-            string selectedIndexCategory = "56bf8121-329a-4ef0-9805-ae754e1f2dee";
-            SelectList Region = new SelectList(db.ApplicationAddressRegionPost.ToList(), "Id", "Region", selectedIndexRegion);
-            ViewBag.Region = Region;
-            SelectList City = new SelectList(db.ApplicationAddressCityPost.Where(i => i.ApplicationAddressRegionPostId == selectedIndexRegion), "Id", "City");
-            ViewBag.City = City;
-            SelectList Category = new SelectList(db.ApplicationCategory.ToList(), "Id", "Name", selectedIndexCategory);
-            ViewBag.Category = Category;
-            SelectList Subcategory = new SelectList(db.ApplicationSubCategory.Where(i => i.ApplicationCategoryId == selectedIndexCategory), "Id", "Name");
-            ViewBag.Subcategory = Subcategory;
-            return View();  
+            GetDropDownListValue();
+            return View();
         }
-        [HttpGet]
-        public ActionResult GetItems(string id)
-        {
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                return PartialView(db.ApplicationAddressCityPost.Where(i => i.ApplicationAddressRegionPostId == id).ToList());
-            }
-        }
-        [HttpGet]
-        public ActionResult GetItemsCategory(string id)
-        {
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                return PartialView(db.ApplicationSubCategory.Where(i => i.ApplicationCategoryId == id).ToList());
-            }
-        }
+
         [HttpPost]
-        public async Task<ActionResult> Addpublished(RegisterViewModelPost model, HttpPostedFileBase Image)
+        public async Task<ActionResult> CreatePost(RegisterPostViewModel model, HttpPostedFileBase Image)
         {
             if (ModelState.IsValid && Image != null)
             {
@@ -188,7 +161,7 @@ namespace ProjectSwapp.Controllers
                     using (ApplicationDbContext db = new ApplicationDbContext())
                     {
                         model.ImageData = imageData;
-                        var post = new ApplicationPost
+                        var post = new  SwappPosts
                         {
                             Id = Guid.NewGuid().ToString(),
                             Name = model.Name,
@@ -201,60 +174,29 @@ namespace ProjectSwapp.Controllers
                             SubCategoryId = model.Subcategory.ToString(),
                             UserId = user.Id
                         };
-                        user.Posts.Add(post);
-                        
+                        user.Posts.Add(post);                       
                     }
                     await UserManager.UpdateAsync(user);
-                    return RedirectToAction("Published", new { Message = "SaveSuccess" });
+                    return RedirectToAction("Posts", new { Message = "SaveSuccess" });
                 }
             }
             else
             {
-                ApplicationDbContext db = new ApplicationDbContext();
-                string selectedIndexRegion = "3c5c16c3-8ab8-416c-8996-a4dd1a26dcd2";
-                string selectedIndexCategory = "56bf8121-329a-4ef0-9805-ae754e1f2dee";
-                SelectList Region = new SelectList(db.ApplicationAddressRegionPost.ToList(), "Id", "Region", selectedIndexRegion);
-                ViewBag.Region = Region;
-                SelectList City = new SelectList(db.ApplicationAddressCityPost.Where(i => i.ApplicationAddressRegionPostId == selectedIndexRegion), "Id", "City");
-                ViewBag.City = City;
-                SelectList Category = new SelectList(db.ApplicationCategory.ToList(), "Id", "Name", selectedIndexCategory);
-                ViewBag.Category = Category;
-                SelectList Subcategory = new SelectList(db.ApplicationSubCategory.Where(i => i.ApplicationCategoryId == selectedIndexCategory), "Id", "Name");
-                ViewBag.Subcategory = Subcategory;
+                GetDropDownListValue();
                 return View();
             }
             return View(model);
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Delete(string Id)
-        {
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (user != null)
-            {
-                using (ApplicationDbContext db = new ApplicationDbContext())
-                {
-                    foreach (var post in db.ApplicationPost.Where(i => i.Id == Id))
-                    {
-                        db.ApplicationPost.Remove(post);
-                    }
-                    await db.SaveChangesAsync();
-                }
-                return RedirectToAction("Published", new { Message = "DeleteSuccess" });
-            }
-            return View();
-
-        }
-
         //[HttpPost]
-        //public async Task<ActionResult> Requestpost(ApplicationPost PostId)
+        //public async Task<ActionResult> RequestPost(SwappPosts PostId)
         //{
         //    var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
         //    if (user != null)
         //    {
         //        using (ApplicationDbContext db = new ApplicationDbContext())
         //        {
-        //            foreach (var post in db.ApplicationPost.Where(i => i.Id == PostId.Id))
+        //            foreach (var post in db.SwappPosts.Where(i => i.Id == PostId.Id))
         //            {
         //                user.PostsRequest.Add(post);
         //            }
@@ -268,7 +210,7 @@ namespace ProjectSwapp.Controllers
 
 
         //[HttpGet]
-        //public async Task <ActionResult> Requestpublished()
+        //public async Task<ActionResult> Requestpublished()
         //{
         //    var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
         //    if (user != null)
@@ -278,6 +220,56 @@ namespace ProjectSwapp.Controllers
         //    return View();
         //}
 
+        [HttpPost]
+        public async Task<ActionResult> Delete(string Id)
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user != null)
+            {
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    foreach (var post in db. SwappPosts.Where(i => i.Id == Id))
+                    {
+                        db. SwappPosts.Remove(post);
+                    }
+                    await db.SaveChangesAsync();
+                }
+                return RedirectToAction("Posts", new { Message = "DeleteSuccess" });
+            }
+            return View();
+
+        }
+
+        private void GetDropDownListValue()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            SelectList Region = new SelectList(db.SwappAdrRegionPost.ToList(), "Id", "Region", db.SwappAdrRegionPost.FirstOrDefault().Id);
+            ViewBag.Region = Region;
+            SelectList City = new SelectList(db.SwappAdrCityPost.Where(i => i.SwappAdrRegionPostId == db.SwappAdrRegionPost.FirstOrDefault().Id), "Id", "City");
+            ViewBag.City = City;
+            SelectList Category = new SelectList(db.SwappCategory.ToList(), "Id", "Name", db.SwappCategory.FirstOrDefault().Id);
+            ViewBag.Category = Category;
+            SelectList Subcategory = new SelectList(db.SwappSubCategory.Where(i => i.SwappCategoryId == db.SwappCategory.FirstOrDefault().Id), "Id", "Name");
+            ViewBag.Subcategory = Subcategory;
+        }
+
+        [HttpGet]
+        public ActionResult GetItemsCity(string id)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                return PartialView(db.SwappAdrCityPost.Where(i => i.SwappAdrRegionPostId == id).ToList());
+            }
+        }
+
+        [HttpGet]
+        public ActionResult GetItemsCategory(string id)
+        {
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                return PartialView(db.SwappSubCategory.Where(i => i.SwappCategoryId == id).ToList());
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {

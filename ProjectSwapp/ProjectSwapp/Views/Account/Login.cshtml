@@ -3,9 +3,7 @@
 @{
     ViewBag.Title = "Login";
 }
-
 <h2>@ViewBag.Title</h2>
-
 <section id="loginForm">
     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
       {
@@ -50,16 +48,6 @@
                     </p>*@
     }
 </section>
-
-        
-
-    @*<div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>*@
-
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
