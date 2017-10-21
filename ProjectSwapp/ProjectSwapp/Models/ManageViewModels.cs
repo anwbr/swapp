@@ -62,7 +62,6 @@ namespace ProjectSwapp.Models
         [Required(ErrorMessage = "Please input Date")]
         public DateTime Date { get; set; }
         public string Status { get; set; }
-        [Required(ErrorMessage = "You must download min 1 pictures")]
         public byte[] ImageData { get; set; }
         public string Category { get; set; }
         [Required(ErrorMessage = "Please choose Subcategory")]

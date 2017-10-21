@@ -15,7 +15,7 @@
                 <li class="ai_image__upload" id="image-2" onclick="$('#imageupload').click();"></li>
                 <li class="ai_image__upload" id="image-3" onclick="$('#imageupload').click();"></li>
             </ul>
-        <input type="file" name="files[]" accept=".jpg,.jpeg,.gif,.png,.bmp" multiple="" id="imageupload">
+        <input type="file" name="Image" accept=".jpg,.jpeg,.gif,.png,.bmp" multiple="" id="imageupload">
         <div class="form_info">Max count photographies 4</div>
     </div>
     <br />
@@ -55,66 +55,60 @@
 }
 @section scripts{
     <script type="text/javascript">
-    $(function () {
-        $('#region').change(function(){
-            var id = $(this).val();
-            $.ajax({
-                type: 'GET',
-                url: '@Url.Action("GetItems")/' + id,
-                success: function (data) {
-                    $('#city').replaceWith(data);
-                }
+        $(function () {
+            $('#region').change(function () {
+                var id = $(this).val();
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("GetItemsCity")/' + id,
+                    success: function (data) {
+                        $('#city').replaceWith(data);
+                    }
+                });
             });
         });
-    })
-    </script>
-    <script type="text/javascript">
-    $(function () {
-        $('#category').change(function(){
-            var id = $(this).val();
-            $.ajax({
-                type: 'GET',
-                url: '@Url.Action("GetItemsCategory")/' + id,
-                success: function (data) {
-                    $('#subcategory').replaceWith(data);
-                }
+        $(function () {
+            $('#category').change(function () {
+                var id = $(this).val();
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("GetItemsCategory")/' + id,
+                    success: function (data) {
+                        $('#subcategory').replaceWith(data);
+                    }
+                });
             });
         });
-    })
     </script>
     <script>
         function removeImg(elem) {
-            var itemLi = elem.id;
-            alert(itemLi);
-            $('.ai_image__item img', '#itemLi').remove();
-        var li = document.createElement('li');
-        li.innerHTML = ['<li class="ai_image__upload" id="'+ elem.id +'" onclick="$(\'#imageupload\').click();"></li>'].join('');
-        document.getElementById('sortable').insertBefore(li, null);
-    }
-
-    function handleFileSelect(evt) {
-        var index = $('.ai_image__item img').length;
-        var files = evt.target.files;
-        for (var i = 0, f; f = files[i]; i++) {
-            if (!f.type.match('image.*')) {
-                continue;
-            }
-            var reader = new FileReader();
-            reader.onload = (function (theFile) {
-                return function (e) {
-                    var span = document.createElement('span');
-                    span.innerHTML = ['<img class="thumb" src="', e.target.result,
-                        '" title="', escape(theFile.name), '"/><b  class="ai_image__delete" id="image-'+index+'" onclick="removeImg(this);"></b>'].join('');
-                    document.getElementById('image-' + index).insertBefore(span, null);
-
-                };
-            })(f);
-            reader.readAsDataURL(f);
-            document.getElementById("image-" + index).className = 'ai_image__item img';
-            document.getElementById("image-" + index).onclick = "none";
+            $('li#' + elem.id + '').remove();
+            var NextElem = elem.id.replace(/(\d+)+/g, function (match, number) {
+                return parseInt(number) + 1;
+            });
+            alert(NextElem);
+            $('<li class="ai_image__upload" id="' + elem.id + '" onclick="$(\'#imageupload\').click();"></li>').insertBefore($('li#' + NextElem + ''));
         }
-    }
-    document.getElementById('imageupload').addEventListener('change', handleFileSelect, false);
+        function handleFileSelect(evt) {
+            var index = $('.ai_image__item img').length;
+            var files = evt.target.files;
+            for (var i = 0, f; f = files[i]; i++) {
+                if (!f.type.match('image.*')) {
+                    continue;
+                }
+                var reader = new FileReader();
+                reader.onload = (function (theFile) {
+                    return function (e) {
+                        alert(index);
+                        document.getElementById('image-' + index).innerHTML = ['<img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/><b  class="ai_image__delete glyphicon glyphicon-remove" id="image-' + index + '" onclick="removeImg(this);"></b>'].join('');
+                    };
+                })(f);
+                reader.readAsDataURL(f);
+                document.getElementById("image-" + index).className = 'ai_image__item img';
+                document.getElementById("image-" + index).onclick = "none";
+            }
+        }
+        document.getElementById('imageupload').addEventListener('change', handleFileSelect, false);
     </script>
 }
 
