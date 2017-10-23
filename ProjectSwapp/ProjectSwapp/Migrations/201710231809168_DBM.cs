@@ -3,7 +3,7 @@ namespace ProjectSwapp.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class SwappDBMigration : DbMigration
+    public partial class DBM : DbMigration
     {
         public override void Up()
         {
@@ -81,7 +81,6 @@ namespace ProjectSwapp.Migrations
                         Name = c.String(),
                         Description = c.String(),
                         Address = c.String(),
-                        DateFunction = c.DateTime(nullable: false),
                         DateCreatePost = c.String(),
                         Status = c.String(),
                         ImageData = c.Binary(),

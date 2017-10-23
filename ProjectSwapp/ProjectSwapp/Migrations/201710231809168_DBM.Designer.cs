@@ -7,13 +7,13 @@ namespace ProjectSwapp.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class SwappDBMigration : IMigrationMetadata
+    public sealed partial class DBM : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(SwappDBMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(DBM));
         
         string IMigrationMetadata.Id
         {
-            get { return "201710202032297_SwappDBMigration"; }
+            get { return "201710231809168_DBM"; }
         }
         
         string IMigrationMetadata.Source

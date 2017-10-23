@@ -9,12 +9,12 @@
     <p class="text-success">@ViewBag.StatusMessage</p>
     <div class="form_section">
         <label class="form_section form_tag">Photography</label>
-            <ul class="ai_image__list" id="sortable" rotation="0">
-                <li class="ai_image__upload" id="image-0" onclick="$('#imageupload').click();"></li>
-                <li class="ai_image__upload" id="image-1" onclick="$('#imageupload').click();"></li>
-                <li class="ai_image__upload" id="image-2" onclick="$('#imageupload').click();"></li>
-                <li class="ai_image__upload" id="image-3" onclick="$('#imageupload').click();"></li>
-            </ul>
+        <ul class="ai_image__list" id="sortable" rotation="0">
+            <li class="ai_image__upload" id="image-0" onclick="$('#imageupload').click();"></li>
+            <li class="ai_image__upload" id="image-1" onclick="$('#imageupload').click();"></li>
+            <li class="ai_image__upload" id="image-2" onclick="$('#imageupload').click();"></li>
+            <li class="ai_image__upload" id="image-3" onclick="$('#imageupload').click();"></li>
+        </ul>
         <input type="file" name="Image" accept=".jpg,.jpeg,.gif,.png,.bmp" multiple="" id="imageupload">
         <div class="form_info">Max count photographies 4</div>
     </div>
@@ -24,7 +24,7 @@
         @Html.TextBoxFor(m => m.Name, new { @class = "form_controlinput", @placeholder = "for example phone HTC" })
     </div>
     <br />
-    <div class="form_section">
+    <div class="form_section" id="GlobalDiv">
         <label class="form_section form_tag">Category</label>
         @Html.DropDownListFor(m => m.Category, ViewBag.Category as SelectList, new { @class = "form_control form_controlinput", @id = "category" })
         <br />
@@ -35,18 +35,16 @@
         <br />
         @Html.DropDownListFor(m => m.City, ViewBag.City as SelectList, new { @class = "form_control form_controlinput", @id = "city" })
         <label class="form_section form_tag">Descriptions</label>
-        @Html.TextAreaFor(m => m.Description, new { @class = "form_control form_controlinputarea", @placeholder = "The description must contain at least 5 and no more 200 characters ", @maxlength = "200", @rows = "3" })
+        @Html.TextAreaFor(m => m.Description, new { @class = "form_control form_controlinputarea", @style = "resize:none", @placeholder = "The description must contain at least 5 and no more 200 characters ", @maxlength = "200", @rows = "3"})
         <br />
-        <div class="btn-group" style=" margin-left:20px; width:100%" data-toggle="buttons">
-            <label class="btn btn-default active " style=" width:50%">
-                <input type="radio" name="Status" id="Status" autocomplete="off" checked value="Swap"> Swap
-            </label>
-            <label class="btn btn-default" style=" width:50%">
-                <input type="radio" name="Status" id="Status" autocomplete="off" value="Rent">Rent
-            </label>
+        <div class="btn-group" style=" margin-left:20px; width:100%" data-toggle="buttons" id="RadioChecked">
+                <label class="btn btn-default active " style=" width:50%">
+                    <input type="radio" name="Status" id="Status" autocomplete="off" checked value="Swap"> Swap
+                </label>
+                <label class="btn btn-default" style=" width:50%">
+                    <input type="radio" name="Status" id="Status" autocomplete="off" value="Rent">Rent
+                </label>
         </div>
-        <label class="form_section form_tag">Date</label>
-        <input type="date" class="form_control form_controlinputarea" name="Date" value="">
     </div>
     <br />
     <div class="form_section">
@@ -99,7 +97,6 @@
                 var reader = new FileReader();
                 reader.onload = (function (theFile) {
                     return function (e) {
-                        alert(index);
                         document.getElementById('image-' + index).innerHTML = ['<img class="thumb" src="', e.target.result, '" title="', escape(theFile.name), '"/><b  class="ai_image__delete glyphicon glyphicon-remove" id="image-' + index + '" onclick="removeImg(this);"></b>'].join('');
                     };
                 })(f);

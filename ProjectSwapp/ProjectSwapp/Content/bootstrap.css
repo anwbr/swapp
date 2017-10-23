@@ -1821,6 +1821,7 @@ input[type="number"]::-webkit-inner-spin-button {
     line-height: 100%;
     margin-bottom: 0px;
 }
+
 .form_info {
     color: #7b7b7d;
     padding: 0px 0px 0px 20px;
@@ -1857,10 +1858,103 @@ input[type="number"]::-webkit-inner-spin-button {
     border: 1px solid #cccccc;
     border-radius: 4px;
 }
+.list {
+    margin: 0;
+}
 
+.list__content.list__content_type_line {
+    margin: 0;
+}
 
+.list__content {
+    margin: 0;
+    position: relative;
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    -o-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
 
+.list_ads.list_ads_type_line {
+    position: static;
+}
 
+.list_ads {
+    position: relative;
+    padding-bottom: 80px;
+}
+
+.list_ads_type_line .list_ads__item {
+    zoom: 1;
+    -webkit-box-shadow: 0 -1px 0 #dbdbe1 inset;
+    -moz-box-shadow: 0 -1px 0 #dbdbe1 inset;
+    box-shadow: 0 -1px 0 #dbdbe1 inset;
+    background-color: #dbdbe1;
+    margin-bottom: 15px;
+    position: relative;
+    height: 130px;
+}
+
+.list_ads_type_line .list_ads__image_container {
+    width: 235px;
+    margin-right: 25px;
+    overflow: hidden;
+    height: 100%;
+    float: left;
+}
+
+.list_ads_type_line .list_ads__image {
+    position: relative;
+    height: 100%;
+    display: block;
+}
+
+.list_ads_type_line .list_ads__info_container {
+    margin: 0 0 0 260px;
+    padding: 15px 15px 15px 0;
+    height: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.list_ads_type_line .list_ads__title {
+    font-size: 1.375em;
+    max-height: 45px;
+    min-height: 45px;
+    margin: 0 30px 10px 0;
+}
+
+.list_ads__title {
+     color: #000; 
+     font-size: 1.375em; 
+     line-height: 1.3em; 
+     font-weight: 600; 
+     display: block; 
+     overflow: hidden; 
+     text-overflow: ellipsis; 
+}
+
+.list_ads_type_line .list_ads__date_location {
+    margin: 0 0 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #7b7b7d;
+}
+
+.list_ads__date, .list_ads__location {
+    color: #7b7b7d;
+    font-size: 1em;
+    line-height: 100%;
+}
+
+.list_ads_type_line .list_ads__image {
+    position: relative;
+    height: 100%;
+    display: block;
+}
 
 
 .form-control:-moz-placeholder {

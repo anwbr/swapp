@@ -39,7 +39,6 @@ namespace ProjectSwapp.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Address { get; set;}
-        public DateTime DateFunction { get; set; }
         public string DateCreatePost { get; set; }
         public string Status { get; set; }
         public byte[] ImageData { get; set; }

@@ -60,7 +60,7 @@ namespace ProjectSwapp.Controllers
                 : message == ManageMessageId.SetPasswordSuccess ? "Setted password"
                 : message == ManageMessageId.Error ? "Error"
                 : "";
-            var userId = User.Identity.GetUserId();            
+            var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
@@ -133,7 +133,7 @@ namespace ProjectSwapp.Controllers
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user != null)
             {
-                ViewBag.item = user.Posts;
+                ViewBag.item = user.Posts;     
             }
             return View();
         }
@@ -158,23 +158,24 @@ namespace ProjectSwapp.Controllers
                     {
                         imageData = binaryReader.ReadBytes(Image.ContentLength);
                     }
+                    
                     using (ApplicationDbContext db = new ApplicationDbContext())
                     {
+                        string tempAddress = db.SwappAdrCityPost.FirstOrDefault(i => i.Id == model.City.ToString()).City;
                         model.ImageData = imageData;
-                        var post = new  SwappPosts
+                        var post = new SwappPosts
                         {
                             Id = Guid.NewGuid().ToString(),
                             Name = model.Name,
                             Description = model.Description,
-                            Address = model.City.ToString(),
-                            DateFunction = model.Date,
+                            Address = tempAddress,
                             DateCreatePost = DateTime.Now.ToString("hh:mm:ss"),
                             Status = model.Status,
                             ImageData = model.ImageData,
                             SubCategoryId = model.Subcategory.ToString(),
                             UserId = user.Id
                         };
-                        user.Posts.Add(post);                       
+                        user.Posts.Add(post);
                     }
                     await UserManager.UpdateAsync(user);
                     return RedirectToAction("Posts", new { Message = "SaveSuccess" });
@@ -228,9 +229,9 @@ namespace ProjectSwapp.Controllers
             {
                 using (ApplicationDbContext db = new ApplicationDbContext())
                 {
-                    foreach (var post in db. SwappPosts.Where(i => i.Id == Id))
+                    foreach (var post in db.SwappPosts.Where(i => i.Id == Id))
                     {
-                        db. SwappPosts.Remove(post);
+                        db.SwappPosts.Remove(post);
                     }
                     await db.SaveChangesAsync();
                 }
