@@ -133,6 +133,7 @@ namespace ProjectSwapp.Controllers
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user != null)
             {
+
                 ViewBag.item = user.Posts;     
             }
             return View();
@@ -169,7 +170,7 @@ namespace ProjectSwapp.Controllers
                             Name = model.Name,
                             Description = model.Description,
                             Address = tempAddress,
-                            DateCreatePost = DateTime.Now.ToString("hh:mm:ss"),
+                            DateCreatePost = DateTime.Now.ToString(),
                             Status = model.Status,
                             ImageData = model.ImageData,
                             SubCategoryId = model.Subcategory.ToString(),

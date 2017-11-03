@@ -3,31 +3,40 @@
 }
 <h2>@ViewBag.Title</h2>
 <p class="text-success">@ViewBag.StatusMessage</p>
-<div class="list">
-    <div class="list__content list__content_type_line">
-        <div class="list_ads list_ads_type_line">
-            @foreach (ProjectSwapp.Models.SwappPosts item in ViewBag.item)
+<div class="list_posts">
+    @foreach (ProjectSwapp.Models.SwappPosts item in ViewBag.item)
             {
-                <article class="list_ads__item">
-                    <div class="list_ads__image_container">
-                        <a lang="" data-images="/09/0948031340.jpg,/09/0974197290.jpg,/09/0924741211.jpg" class="list_ads__link list_ads__image">
-                            @Html.Raw("<img src=\"data:image/jpeg;base64," + Convert.ToBase64String(item.ImageData) + "\" />")
-                        </a>
-                       
-                    </div>
-                    <div class="list_ads__info_container">
-                        <label class="form_tag">@item.Name</label>
-                        <div class="list_ads__date_location">
-                            <time class="list_ads__date">Time create: @item.DateCreatePost</time>
-                            <time class="list_ads__location"> /Category: @item.SubCategory /Address: @item.Address</time>
-                        </div>
-                    </div>
-                </article>
-            }
+        <article class="list_post">
+            <div class="list_image_container">
+                <output lang="" data-images="" class="list_image">
+                    @Html.Raw("<img class='img' src=\"data:image/jpeg;base64," + Convert.ToBase64String(item.ImageData) + "\" />")
+                </output>
 
-        </div>
-    </div>
-</div> 
+            </div>
+            <div class="list_info_container">
+                <div style="float:right">
+                    @using (Html.BeginForm("Delete", "Manage", FormMethod.Post))
+                    {
+                        <input type="hidden" name="Id" value="@item.Id" />
+                        <input type="submit" value="Delete" class="btn btn-danger" style="width:75px"/>
+                    }
+                    @using (Html.BeginForm("Change", "Manage", FormMethod.Post))
+                    {
+                        <input type="hidden" name="Id" value="@item.Id" />
+                        <input type="submit" value="ChangeDemo" class="btn btn-default" style="width:75px" />
+                    }
+                </div>
+                <output class="list_title">@item.Name</output>
+                    
+                    <output class="list_data_description">Description: @item.Description</output> <br />
+                    <time class="list_data_other">Time create: @item.DateCreatePost</time> <br />
+                    <output class="list_data_other">Category: @item.SubCategory </output> <br />
+                    <output class="list_data_other">Address: @item.Address</output>
+            </div>
+        </article>
+    }
+
+</div>
 
 
 @*@using (Html.BeginForm("Delete", "Manage", FormMethod.Post))

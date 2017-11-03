@@ -139,6 +139,36 @@ img {
   border: 0;
 }
 
+.img {
+    padding: 0;
+    position: absolute;
+    max-width: 100%;
+    height: auto;
+    background: #c2c2c2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.imgAdd {
+    padding: 0;
+    position: relative;
+    width: 200px;
+    height: 140px;
+    background: #c2c2c2;
+}
+
+.imgAdd img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+
 svg:not(:root) {
   overflow: hidden;
 }
@@ -335,8 +365,9 @@ textarea {
 }
 
 a {
-  color: #428bca;
-  text-decoration: none;
+    color: #428bca;
+    text-decoration: none;
+    cursor:pointer;
 }
 
 a:hover,
@@ -351,9 +382,6 @@ a:focus {
   outline-offset: -2px;
 }
 
-/*img {
-  vertical-align: middle;
-}*/
 
 .img-responsive {
   display: block;
@@ -378,26 +406,6 @@ a:focus {
   -webkit-transition: all 0.2s ease-in-out;
           transition: all 0.2s ease-in-out;
 }
-
-.img {
-    padding: 0;
-    position: relative;
-    width: 200px;
-    height: 140px;
-    background: #c2c2c2;
-    border: 1px solid rgba(0, 0, 0, 0.075);
-    border-radius: 2px;
-}
-
-.img img {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 100%;
-    max-height: 100%;
-}
-
 
 .img-circle {
   border-radius: 50%;
@@ -1722,74 +1730,6 @@ input[type="number"]::-webkit-inner-spin-button {
   height: auto;
 }
 
-
-
-
-.ai_image__list {
-    zoom: 1;
-    list-style: none;
-    margin: 0;
-    padding: 0px 0px 0px 20px;
-    overflow: hidden;
-}
-
-.ai_image__upload {
-    cursor: pointer;
-}
-
-.ai_image__upload {
-    background-size: 30px;
-    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiI…AtMy45OTksLTRaIiBzdHlsZT0iZmlsbDojZmZmOyIvPjwvZz48L2c+PC9nPjwvZz48L3N2Zz4=);
-    background-repeat: no-repeat;
-    background-position: 50%;
-}
-
-/*.ai_image__item img {
-    height: auto;
-    width: auto;
-}*/
-.ai_image__delete {
-    position: absolute;
-    cursor: pointer;
-    z-index: 100;
-    /*height: 40px;
-    width: 40px;*/
-    border-radius: 50%;
-    -moz-border-radius: 50%;
-    -webkit-border-radius: 50%;
-    /*background-color: rgba(0,0,0,0.5);*/
-    display: block;
-    background-repeat: no-repeat;
-    background-position: center;
-    top: 6%;
-    margin: -15px 0 0 -15px
-}
-.ai_image__delete, .ai_image_rotate {
-    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiI…Igc3R5bGU9ImZpbGw6I2ZmZjtmaWxsLXJ1bGU6bm9uemVybzsiLz48L2c+PC9nPjwvc3ZnPg==);
-    background-size: 15px;
-    left: 7%;
-    cursor: pointer;
-}
-
-.ai_image__item, .ai_image__upload {
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    position: relative;
-    background-color: #e8e8ef;
-    display: inline-block;
-    height: 184px;
-    width: 223px;
-    margin: 0 15px 15px 0;
-    vertical-align: top;
-}
-
-.ai_image__file {
-    display: block;
-    overflow: hidden;
-    height: 0;
-}
-
 .input[type="file" i] {
     align-items: baseline;
     color: inherit;
@@ -1828,9 +1768,11 @@ input[type="number"]::-webkit-inner-spin-button {
     font-size: .90em;
     line-height: 120%;
 }
+
 .form_control {
     padding: 15px 60px 30px 20px;
 }
+
 .form_controlinput {
     max-width: inherit;
     margin-left:20px;
@@ -1858,105 +1800,111 @@ input[type="number"]::-webkit-inner-spin-button {
     border: 1px solid #cccccc;
     border-radius: 4px;
 }
-.list {
-    margin: 0;
-}
 
-.list__content.list__content_type_line {
-    margin: 0;
-}
 
-.list__content {
-    margin: 0;
-    position: relative;
-    -webkit-transform: translate3d(0,0,0);
-    -moz-transform: translate3d(0,0,0);
-    -o-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
-}
-
-.list_ads.list_ads_type_line {
-    position: static;
-}
-
-.list_ads {
-    position: relative;
-    padding-bottom: 80px;
-}
-
-.list_ads_type_line .list_ads__item {
-    zoom: 1;
-    -webkit-box-shadow: 0 -1px 0 #dbdbe1 inset;
-    -moz-box-shadow: 0 -1px 0 #dbdbe1 inset;
-    box-shadow: 0 -1px 0 #dbdbe1 inset;
+.list_posts .list_post {
     background-color: #dbdbe1;
     margin-bottom: 15px;
     position: relative;
-    height: 130px;
+    height: 135px;
 }
 
-.list_ads_type_line .list_ads__image_container {
-    width: 235px;
+.list_posts .list_image_container {
+    width: 240px;
     margin-right: 25px;
     overflow: hidden;
     height: 100%;
     float: left;
 }
 
-.list_ads_type_line .list_ads__image {
+.list_posts .list_image {
     position: relative;
     height: 100%;
     display: block;
 }
 
-.list_ads_type_line .list_ads__info_container {
+.list_posts .list_info_container {
     margin: 0 0 0 260px;
     padding: 15px 15px 15px 0;
     height: 100%;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
     position: relative;
 }
 
-.list_ads_type_line .list_ads__title {
+.list_posts .list_title {
     font-size: 1.375em;
-    max-height: 45px;
-    min-height: 45px;
-    margin: 0 30px 10px 0;
+    max-height: 30px;
+    min-height: 0px;
+    margin: 0 35px 5px 0;
 }
 
-.list_ads__title {
+.list_title {
      color: #000; 
      font-size: 1.375em; 
-     line-height: 1.3em; 
+     line-height: 1.1em; 
      font-weight: 600; 
      display: block; 
      overflow: hidden; 
      text-overflow: ellipsis; 
 }
 
-.list_ads_type_line .list_ads__date_location {
+.list_data_description {
     margin: 0 0 4px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-size: 1.2em;
     color: #7b7b7d;
 }
 
-.list_ads__date, .list_ads__location {
+.list_data_other {
     color: #7b7b7d;
     font-size: 1em;
     line-height: 100%;
 }
 
-.list_ads_type_line .list_ads__image {
-    position: relative;
-    height: 100%;
-    display: block;
+
+.image_list {
+    zoom: 1;
+    list-style: none;
+    margin: 0;
+    overflow: hidden;
 }
 
 
+.image_upload {
+    background-size: 30px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    cursor: pointer;
+}
+
+.image_delete {
+    position: absolute;
+    cursor: pointer;
+    z-index: 100;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center;
+    top: 6%;
+    margin: -15px 0 0 -15px;
+    background-size: 15px;
+    left: 7%;
+}
+
+.image_item, .image_upload {
+    position: relative;
+    background-color: #e8e8ef;
+    display: inline-block;
+    height: 200px;
+    width: 248px;
+    margin: 0 15px 15px 0;
+    vertical-align: top;
+}
+      
 .form-control:-moz-placeholder {
   color: #999999;
 }
@@ -2270,7 +2218,6 @@ textarea.input-lg {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
-       -o-user-select: none;
           user-select: none;
 }
 .mbtn {
@@ -2290,7 +2237,6 @@ textarea.input-lg {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-    -o-user-select: none;
     user-select: none;
 }
 
@@ -2449,9 +2395,8 @@ fieldset[disabled] .btn-warning.active {
 }
 
 .btn-danger {
-  color: #ffffff;
-  background-color: #d9534f;
-  border-color: #d43f3a;
+    color: #ffffff;
+    background-color: #B53737;
 }
 
 .btn-danger:hover,
@@ -2677,8 +2622,13 @@ input[type="button"].btn-block {
   src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
 }
 
+.glyphicon-plus {
+    font-size: 70px;
+}
+
 .glyphicon {
     font-family: 'Glyphicons Halflings';
+    
 }
 
 .glyphicon-asterisk:before {
@@ -5432,7 +5382,6 @@ a.thumbnail:focus {
 .progress.active .progress-bar {
   -webkit-animation: progress-bar-stripes 2s linear infinite;
      -moz-animation: progress-bar-stripes 2s linear infinite;
-      -ms-animation: progress-bar-stripes 2s linear infinite;
        -o-animation: progress-bar-stripes 2s linear infinite;
           animation: progress-bar-stripes 2s linear infinite;
 }
