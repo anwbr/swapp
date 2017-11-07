@@ -77,7 +77,7 @@ namespace ProjectSwapp.Controllers
         {
             return View();
         }
-
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
@@ -133,8 +133,18 @@ namespace ProjectSwapp.Controllers
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             if (user != null)
             {
+                ICollection<SwappSubCategory> lsubCategory = new List<SwappSubCategory>();
+                ApplicationDbContext db = new ApplicationDbContext();
+                ViewBag.item = user.Posts;
+                foreach (var post in user.Posts)
+                {
+                    foreach (SwappSubCategory item in db.SwappSubCategory.Where(i => i.Id == post.SubCategoryId))
+                    {
+                        lsubCategory.Add(item);
+                    }
+                }
+                ViewBag.itemCategory = lsubCategory;
 
-                ViewBag.item = user.Posts;     
             }
             return View();
         }
@@ -159,7 +169,7 @@ namespace ProjectSwapp.Controllers
                     {
                         imageData = binaryReader.ReadBytes(Image.ContentLength);
                     }
-                    
+
                     using (ApplicationDbContext db = new ApplicationDbContext())
                     {
                         string tempAddress = db.SwappAdrCityPost.FirstOrDefault(i => i.Id == model.City.ToString()).City;
@@ -239,7 +249,35 @@ namespace ProjectSwapp.Controllers
                 return RedirectToAction("Posts", new { Message = "DeleteSuccess" });
             }
             return View();
+        }
 
+        [HttpGet]
+        public ActionResult Change(string id)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var post = db.SwappPosts.FirstOrDefault(i => i.Id == id);
+            if (post != null)
+                return PartialView(post);
+            else return HttpNotFound();
+        }
+
+
+        [HttpPost]
+        public ActionResult ChangeItem(SwappPosts changeItem)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            var post = db.SwappPosts.FirstOrDefault(i => i.Id == changeItem.Id);
+            if (post != null)
+            {
+                if (changeItem.Name != null & changeItem.Description != null)
+                {
+                    post.Name = changeItem.Name;
+                    post.Description = changeItem.Description;
+                    db.SaveChanges();
+                    return RedirectToAction("Posts", new { Message = "ChangeSuccess" });
+                }
+            }
+            return RedirectToAction("Posts", new { Message = "ChangeBad" });
         }
 
         private void GetDropDownListValue()

@@ -12,8 +12,8 @@
         <ul class="image_list" id="sortable" rotation="0">
             <li class="image_upload glyphicon glyphicon-plus" id="image-0" onclick="$('#imageupload').click();"></li>
             @*<li class="ai_image__upload" id="image-1" onclick="$('#imageupload').click();"></li>
-            <li class="ai_image__upload" id="image-2" onclick="$('#imageupload').click();"></li>
-            <li class="ai_image__upload" id="image-3" onclick="$('#imageupload').click();"></li>*@
+                <li class="ai_image__upload" id="image-2" onclick="$('#imageupload').click();"></li>
+                <li class="ai_image__upload" id="image-3" onclick="$('#imageupload').click();"></li>*@
         </ul>
         <input type="file" name="Image" accept=".jpg,.jpeg,.gif,.png,.bmp" multiple="" id="imageupload">
         <div class="form_info">Max count photographies 1</div>
@@ -36,15 +36,15 @@
         @Html.DropDownListFor(m => m.City, ViewBag.City as SelectList, new { @class = "form_control form_controlinput", @id = "city" })
         <br />
         <label class="form_section form_tag">Descriptions</label>
-        @Html.TextAreaFor(m => m.Description, new { @class = "form_control form_controlinputarea", @style = "resize:none", @placeholder = "The description must contain at least 5 and no more 200 characters ", @maxlength = "200", @rows = "3"})
+        @Html.TextAreaFor(m => m.Description, new { @class = "form_control form_controlinputarea", @style = "resize:none", @placeholder = "The description must contain at least 5 and no more 200 characters ", @maxlength = "200", @rows = "3" })
         <br />
         <div class="btn-group" style=" margin-left:20px; width:100%" data-toggle="buttons" id="RadioChecked">
-                <label class="btn btn-default active " style=" width:50%">
-                    <input type="radio" name="Status" id="Status" autocomplete="off" checked value="Swap"> Swap
-                </label>
-                <label class="btn btn-default" style=" width:50%">
-                    <input type="radio" name="Status" id="Status" autocomplete="off" value="Rent">Rent
-                </label>
+            <label class="btn btn-default active " style=" width:50%">
+                <input type="radio" name="Status" id="Status" autocomplete="off" checked value="Swap"> Swap
+            </label>
+            <label class="btn btn-default" style=" width:50%">
+                <input type="radio" name="Status" id="Status" autocomplete="off" value="Rent">Rent
+            </label>
         </div>
     </div>
     <br />

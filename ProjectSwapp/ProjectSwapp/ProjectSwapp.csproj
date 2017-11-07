@@ -261,6 +261,7 @@
     <Content Include="Views\Manage\CreatePost.cshtml" />
     <Content Include="Views\Manage\Posts.cshtml" />
     <Content Include="Views\Manage\GetItemsCity.cshtml" />
+    <Content Include="Views\Manage\Change.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
